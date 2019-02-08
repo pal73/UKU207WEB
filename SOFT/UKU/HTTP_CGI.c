@@ -280,7 +280,7 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
         case 'i':
           /* Write the local IP address. The format string is included */
           /* in environment string of the script line.                 */
-          len = sprintf((char *)buf,(const char *)&env[4],web_cnt_main/*LocM.IpAdr[0]*/,
+          len = sprintf((char *)buf,(const char *)&env[4],/*web_cnt_main*/LocM.IpAdr[0],
                         LocM.IpAdr[1],LocM.IpAdr[2],LocM.IpAdr[3]);
           break;
         case 'm':
@@ -424,7 +424,7 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
       /* AD Input - file 'ad.cgi' */
       switch (env[2]) {
         case '1':
-          /////adv = AD_in (2);
+          //adv = web_cnt_main;
           len = sprintf((char *)buf,(const char *)&env[4],adv);
           break;
         case '2':
@@ -437,9 +437,20 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
       }
       break;
 
+    case 'm':
+      	switch (env[1]) {
+        	case '1':
+          		len = sprintf((char *)buf,(const char *)&env[3],web_cnt_2hz);
+          		break;
+     		case '2':
+          		len = sprintf((char *)buf,(const char *)&env[3],web_cnt_main);
+          		break;
+		}
+		break;
+
     case 'x':
       /* AD Input - xml file 'ad.cgx' */
-      /////adv = AD_in (2);
+//      adv = web_cnt_main;
       len = sprintf((char *)buf,(const char *)&env[1],adv);
       break;
 
@@ -447,7 +458,13 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
       /* Button state - xml file 'button.cgx' */
 	  web_plazma[0]++;
       len = sprintf((char *)buf,"<checkbox><id>button%c</id><on>%s</on></checkbox>",
-                    env[1],(web_cnt_main & (1 << (env[1]-'0'))) ? "true" : "false");
+                    env[1],(/*web_cnt_main*/3 & (1 << (env[1]-'0'))) ? "true" : "false");
+      break;
+    case 'z':
+      /* Button state - xml file 'button.cgx' */
+	  web_plazma[0]++;
+      len = sprintf((char *)buf,"<checkbox><id>button%c</id><on>%s</on></checkbox>",
+                    env[1],(/*web_cnt_main*/ 6 & (1 << (env[1]-'0'))) ? "true" : "false");
       break;
   }
   return ((U16)len);

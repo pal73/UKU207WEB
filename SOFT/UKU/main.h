@@ -728,6 +728,7 @@
 #endif
 
 extern short web_cnt_main;
+extern short web_cnt_2hz;
 extern char web_plazma[5];
 
 //***********************************************

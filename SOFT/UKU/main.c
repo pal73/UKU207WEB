@@ -45,6 +45,7 @@
 #endif
 
 short web_cnt_main;
+short web_cnt_2hz;
 char web_plazma[5];
 
 
@@ -1452,6 +1453,7 @@ if(ind==iMn)
 	
 	//int2lcdyx(plazma_but_an,0,10,0);
 	int2lcdyx(web_cnt_main,0,4,0);
+	int2lcdyx(web_cnt_2hz,0,8,0);
 	int2lcdyx(web_plazma[0],1,3,0);	
 	int2lcdyx(web_plazma[1],1,7,0);
 	int2lcdyx(web_plazma[2],1,11,0);
@@ -3487,14 +3489,14 @@ while (1)
 		//LPC_GPIO1->FIODIR|=(1UL<<31);
 		//LPC_GPIO1->FIOPIN^=(1UL<<31);
 
-		
+		web_cnt_main++;
   		}
 		 
 	if(b2Hz)
 		{
 		b2Hz=0;
 
-		
+		web_cnt_2hz++;
 				//uart_out_adr1(dig,150);
 		//sc16is700_wr_buff(CS16IS7xx_THR, 20);
 
@@ -3512,7 +3514,7 @@ while (1)
 		{
 		b1Hz=0;
 
-		web_cnt_main++;
+		
 
 
 

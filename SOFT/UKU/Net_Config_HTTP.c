@@ -33,7 +33,7 @@
 //                          <200=> 200 ms
 //   <i> System Tick Timer interval for software timers
 //   <i> Default: 100 ms
-#define TICK_INTERVAL  10
+#define TICK_INTERVAL  100
 
 // </h>
 // <e>Ethernet Network Interface
@@ -562,7 +562,7 @@
 //   <i> Modify also the number of TCP Sockets because
 //   <i> each HTTP session uses it's own TCP socket
 //   <i> Default: 3
-#define HTTP_NUMSESS   1
+#define HTTP_NUMSESS   2
 
 //   <o>Port Number <1-65535>
 //   <i> Listening port number.
