@@ -46,6 +46,8 @@
 
 short web_cnt_main;
 short web_cnt_2hz;
+const char* web_str= "plazma";
+ 
 char web_plazma[5];
 
 
@@ -881,7 +883,7 @@ else return in;
 //-----------------------------------------------
 void init_ETH(void)
 {
-
+/*
 localm[NETIF_ETH].IpAdr[0]=lc640_read_int(EE_ETH_IP_1);
 localm[NETIF_ETH].IpAdr[1]=lc640_read_int(EE_ETH_IP_2);
 localm[NETIF_ETH].IpAdr[2]=lc640_read_int(EE_ETH_IP_3);
@@ -896,12 +898,12 @@ localm[NETIF_ETH].DefGW[0]=lc640_read_int(EE_ETH_GW_1);
 localm[NETIF_ETH].DefGW[1]=lc640_read_int(EE_ETH_GW_2);
 localm[NETIF_ETH].DefGW[2]=lc640_read_int(EE_ETH_GW_3);
 localm[NETIF_ETH].DefGW[3]=lc640_read_int(EE_ETH_GW_4);
-	
-/*
+*/	
+
 localm[NETIF_ETH].IpAdr[0]=192;
 localm[NETIF_ETH].IpAdr[1]=168;
-localm[NETIF_ETH].IpAdr[2]=2;
-localm[NETIF_ETH].IpAdr[3]=39;
+localm[NETIF_ETH].IpAdr[2]=0;
+localm[NETIF_ETH].IpAdr[3]=20;
 
 localm[NETIF_ETH].NetMask[0]=255;
 localm[NETIF_ETH].NetMask[1]=255;
@@ -911,7 +913,7 @@ localm[NETIF_ETH].NetMask[3]=0;
 localm[NETIF_ETH].DefGW[0]=192;
 localm[NETIF_ETH].DefGW[1]=168;
 localm[NETIF_ETH].DefGW[2]=2;
-localm[NETIF_ETH].DefGW[3]=1;  */
+localm[NETIF_ETH].DefGW[3]=1;  
 }
 
 
@@ -1458,7 +1460,9 @@ if(ind==iMn)
 	int2lcdyx(web_plazma[1],1,7,0);
 	int2lcdyx(web_plazma[2],1,11,0);
 	int2lcdyx(web_plazma[3],1,15,0);
-	int2lcdyx(web_plazma[4],1,19,0); 
+	int2lcdyx(web_plazma[4],1,19,0);
+	int2lcdyx(bps[0]._Uii,2,3,0); 
+	int2lcdyx(bps[1]._Uii,3,3,0);		
 	}
 else if (ind==iLan_set)
 	{
@@ -2966,6 +2970,25 @@ LPC_WDT->WDFEED=0xaa;
 LPC_WDT->WDFEED=0x55;
 }
 
+//-----------------------------------------------
+void data_spirit (void) 
+{
+char i;
+static short spirit_wrk_cnt;
+
+spirit_wrk_cnt++;
+if(spirit_wrk_cnt>20)spirit_wrk_cnt=0;
+
+for(i=0; i<5; i++)
+	{
+	bps[i]._Uii=700+i+spirit_wrk_cnt;
+	bps[i]._Ii=50+i+spirit_wrk_cnt;
+	bps[i]._Ti=(char)(35+i+spirit_wrk_cnt);
+	bps[i]._state=(char)(10+i+spirit_wrk_cnt);
+	bps[i]._flags_tm=(char)(i+spirit_wrk_cnt);
+	}
+ 
+}
 
 //***********************************************
 //***********************************************
@@ -3514,8 +3537,10 @@ while (1)
 		{
 		b1Hz=0;
 
+		web_plazma[0]++;
 		
 
+		data_spirit();
 
 
 		if(!bRESET_INT_WDT)

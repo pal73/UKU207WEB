@@ -1,0 +1,5 @@
+t {
+c m1 "abcd": "%d", 
+c m2 "efgh": "%d" 
+t }
+.

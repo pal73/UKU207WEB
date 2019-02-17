@@ -88,11 +88,11 @@
 
 //     <o>Address byte 3 <0-255>
 //     <i> Default: 0
-#define _IP3           1
+#define _IP3           2
 
 //     <o>Address byte 4 <0-255>
 //     <i> Default: 100
-#define _IP4           108
+#define _IP4           20
 
 //   </h>
 //   <h>Subnet mask
@@ -128,11 +128,11 @@
 
 //     <o>Address byte 3 <0-255>
 //     <i> Default: 0
-#define _GW3           1
+#define _GW3           2
 
 //     <o>Address byte 4 <0-255>
 //     <i> Default: 254
-#define _GW4           254
+#define _GW4           1
 
 //   </h>
 //   <h>Primary DNS Server

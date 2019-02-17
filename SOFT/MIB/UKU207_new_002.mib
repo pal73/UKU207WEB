@@ -1,0 +1,826 @@
+
+UKU207NEW DEFINITIONS ::= BEGIN
+
+IMPORTS
+	enterprises
+		FROM RFC1155-SMI
+	OBJECT-TYPE
+		FROM RFC-1212
+	TRAP-TYPE
+		FROM RFC-1215
+	DisplayString
+		FROM RFC-1213;
+
+
+-- Системы ПромАвтоматики
+
+entSPA-SIB           OBJECT IDENTIFIER ::= { enterprises 33183 }
+uku207new            OBJECT IDENTIFIER ::= { entSPA-SIB 14 }
+displayDeviceInfo    OBJECT IDENTIFIER ::= { uku207new 1 }
+dipslayMains         OBJECT IDENTIFIER ::= { uku207new 2 }
+displayLoad          OBJECT IDENTIFIER ::= { uku207new 3 }
+displaySpecials      OBJECT IDENTIFIER ::= { uku207new 6 }
+commands             OBJECT IDENTIFIER ::= { uku207new 8 }
+sysParams            OBJECT IDENTIFIER ::= { uku207new 10 }
+displayEnergy        OBJECT IDENTIFIER ::= { uku207new 12 }
+displayDEBUG         OBJECT IDENTIFIER ::= { uku207new 13 }
+
+displayDeviceInfoCode  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDeviceInfo 1 }
+
+displayDeviceInfoSerial  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDeviceInfo 2 }
+
+displayDeviceInfoLocation  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(69))
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDeviceInfo 3 }
+
+displayDeviceInfoNumOfBat  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDeviceInfo 4 }
+
+displayDeviceInfoNumOfBps  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDeviceInfo 5 }
+
+displayDeviceInfoNumOfTnv  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDeviceInfo 6 }
+
+displayDeviceInfoNumOfAvt  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDeviceInfo 7 }
+
+displayDeviceInfoNumOfDt  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDeviceInfo 8 }
+
+displayDeviceInfoNumOfSk  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDeviceInfo 9 }
+
+displayDeviceInfoNumOfEvents  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDeviceInfo 10 }
+
+dipslayMainsVoltage  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { dipslayMains 1 }
+
+dipslayMainsFrequency  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { dipslayMains 2 }
+
+dipslayMainsStatus  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { dipslayMains 3 }
+
+-- //
+
+dipslayMainsAlarm  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { dipslayMains 4 }
+
+displayLoadVoltage  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayLoad 1 }
+
+displayLoadCurrent  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayLoad 2 }
+
+displayPSUTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF DisplayPSUEntry
+	ACCESS     not-accessible
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { uku207new 4 }
+
+displayPSUEntry  OBJECT-TYPE
+	SYNTAX 	DisplayPSUEntry
+	ACCESS     not-accessible
+	STATUS     mandatory
+	DESCRIPTION 
+		"PSU listing"
+	INDEX { displayPSUnumber }
+	::= { displayPSUTable 1 }
+
+DisplayPSUEntry ::= SEQUENCE {
+	displayPSUnumber
+		INTEGER,
+	displayPSUVoltage
+		INTEGER,
+	displayPSUCurrent
+		INTEGER,
+	displayPSUTemperature
+		INTEGER,
+	displayPSUStatus
+		INTEGER
+}
+
+displayPSUnumber  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayPSUEntry 1 }
+
+displayPSUVoltage  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayPSUEntry 2 }
+
+displayPSUCurrent  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayPSUEntry 3 }
+
+displayPSUTemperature  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayPSUEntry 4 }
+
+displayPSUStatus  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayPSUEntry 5 }
+
+displayBatTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF DisplayBatEntry
+	ACCESS     not-accessible
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { uku207new 5 }
+
+displayBatEntry  OBJECT-TYPE
+	SYNTAX 	DisplayBatEntry
+	ACCESS     not-accessible
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	INDEX { displayBatteriesMassNumber }
+	::= { displayBatTable 1 }
+
+DisplayBatEntry ::= SEQUENCE {
+	displayBatteriesMassNumber
+		INTEGER,
+	displayBatteriesMassVoltage
+		INTEGER,
+	displayBatteriesMassCurrent
+		INTEGER,
+	displayBatteriesMassTemperature
+		INTEGER,
+	displayBatteriesMassCapacity
+		INTEGER,
+	displayBatteriesMassCharge
+		INTEGER,
+	displayBatteriesMassStatus
+		INTEGER
+}
+
+displayBatteriesMassNumber  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayBatEntry 1 }
+
+displayBatteriesMassVoltage  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayBatEntry 2 }
+
+displayBatteriesMassCurrent  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayBatEntry 3 }
+
+displayBatteriesMassTemperature  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayBatEntry 4 }
+
+displayBatteriesMassCapacity  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayBatEntry 5 }
+
+displayBatteriesMassCharge  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayBatEntry 6 }
+
+displayBatteriesMassStatus  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayBatEntry 7 }
+
+displaySpecialsControlByte  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displaySpecials 1 }
+
+displaySpecialsSpecFunctions  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displaySpecials 2 }
+
+displayDeviceType  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displaySpecials 3 }
+
+displaySpecialsTrapMessage  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..30))
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displaySpecials 4 }
+
+displaySpecialsTrapValue  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displaySpecials 5 }
+
+displaySpecialsCapacityControl  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displaySpecials 6 }
+
+displaySpecialsCompensationCharge  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displaySpecials 7 }
+
+sendCommand  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { commands 1 }
+
+commandParameter  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { commands 2 }
+
+commandID  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { commands 3 }
+
+displayEventsTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF DisplayEventsEntry
+	ACCESS     not-accessible
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { uku207new 9 }
+
+displayEventsEntry  OBJECT-TYPE
+	SYNTAX 	DisplayEventsEntry
+	ACCESS     not-accessible
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	INDEX { displayEventNumber }
+	::= { displayEventsTable 1 }
+
+DisplayEventsEntry ::= SEQUENCE {
+	displayEventNumber
+		DisplayString
+}
+
+displayEventNumber  OBJECT-TYPE
+	SYNTAX     DisplayString
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayEventsEntry 1 }
+
+sysParamsMainPSU  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 1 }
+
+sysParamsSoundAlarmEn  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 2 }
+
+sysParamsAlarmAutoDisable  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 3 }
+
+sysParamsBattTestTime  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 4 }
+
+sysParamsUmax  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 5 }
+
+sysParamsU0  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 6 }
+
+sysParamsU20  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 7 }
+
+sysParamsUsign  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 8 }
+
+sysParamsUminPower  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 9 }
+
+sysParamsUWithothBatt  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 10 }
+
+sysParamsControlCurrent  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 11 }
+
+sysParamsMaxChargeCurrent  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 12 }
+
+sysParamsMaxCurrent  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 13 }
+
+sysParamsMaxCurrentKoef  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 14 }
+
+sysParamsUpChargeKoef  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 15 }
+
+sysParamsPowerupPSUTimeout  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 16 }
+
+sysParamsMaxTemperature  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { sysParams 17 }
+
+dysplayAvtTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF DysplayAvtEntry
+	ACCESS     not-accessible
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { uku207new 11 }
+
+dysplayAvtEntry  OBJECT-TYPE
+	SYNTAX 	DysplayAvtEntry
+	ACCESS     not-accessible
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	INDEX { displayPSUnumber }
+	::= { dysplayAvtTable 1 }
+
+DysplayAvtEntry ::= SEQUENCE {
+	dysplayAvtNumber
+		INTEGER,
+	dysplayAvtStat
+		INTEGER
+}
+
+dysplayAvtNumber  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { dysplayAvtEntry 1 }
+
+dysplayAvtStat  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { dysplayAvtEntry 2 }
+
+displayEnergyVvodPhaseA  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayEnergy 1 }
+
+displayEnergyVvodPhaseB  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayEnergy 2 }
+
+displayEnergyVvodPhaseC  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayEnergy 3 }
+
+displayEnergyPesPhaseA  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayEnergy 4 }
+
+displayEnergyPesPhaseB  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayEnergy 5 }
+
+displayEnergyPesPhaseC  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayEnergy 6 }
+
+displayTotalEnergy  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayEnergy 7 }
+
+displayCurrentEnergy  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayEnergy 8 }
+
+displayDEBUGcommanLength  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDEBUG 1 }
+
+displayDEBUGcommandSENT  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..255))
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDEBUG 2 }
+
+displayDEBUGreplyRCVD  OBJECT-TYPE
+	SYNTAX     DisplayString (SIZE(0..255))
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDEBUG 3 }
+
+displayDEBUGsentPckts  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDEBUG 4 }
+
+displayDEBUGrcvdPckts  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDEBUG 5 }
+
+displayDEBUGSetVar  OBJECT-TYPE
+	SYNTAX     INTEGER (0..65535)
+	ACCESS     read-write
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayDEBUG 6 }
+
+displayINVTable  OBJECT-TYPE
+	SYNTAX SEQUENCE OF DisplayINVEntry
+	ACCESS     not-accessible
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { uku207new 14 }
+
+displayINVEntry  OBJECT-TYPE
+	SYNTAX 	DisplayINVEntry
+	ACCESS     not-accessible
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	INDEX { displayINVNumber }
+	::= { displayINVTable 1 }
+
+DisplayINVEntry ::= SEQUENCE {
+	displayINVNumber
+		INTEGER,
+	displayINVVoltage
+		INTEGER,
+	displayINVCourrent
+		INTEGER,
+	displayINVTemperature
+		INTEGER
+}
+
+displayINVNumber  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayINVEntry 1 }
+
+displayINVVoltage  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayINVEntry 2 }
+
+displayINVCourrent  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayINVEntry 3 }
+
+displayINVTemperature  OBJECT-TYPE
+	SYNTAX     INTEGER
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION 
+		""
+	::= { displayINVEntry 4 }
+
+messageTrap  TRAP-TYPE
+	ENTERPRISE entSPA-SIB
+	VARIABLES { displaySpecialsTrapMessage }
+	DESCRIPTION 
+		"Simple Message Trap"
+	::= 1
+
+informationTrap  TRAP-TYPE
+	ENTERPRISE entSPA-SIB
+	VARIABLES { displaySpecialsTrapMessage, 
+		displaySpecialsTrapValue }
+	DESCRIPTION 
+		"This is the information trap
+		Messages are
+		Alarm serial connection
+		Stop alarm serial connection"
+	::= 2
+
+alarmTrap  TRAP-TYPE
+	ENTERPRISE entSPA-SIB
+	VARIABLES { displaySpecialsTrapMessage, 
+		displaySpecialsTrapValue }
+	DESCRIPTION 
+		"Messages:
+		Alarm Input Power System 
+		Clear Alarm Input Power System
+		Alarm Battery x       - Battery Lost!
+		Clear Alarm Battery x   - x - battery's number
+		Battery x is charging
+		Battery x is not charging
+		Alarm Overheat PSU x - x number of PSU
+		Clear Alarm Overheat PSU x
+		Alarm Low Voltage PSU x
+		Clear Alarm Low Voltage PSU x
+		Alarm High Voltage PSU x
+		Clear Alarm High Voltage PSU x
+		Alarm No Connection PSUx
+		Clear Alarm No Connection PSUx
+		PSU x Locked
+		PSU x Unlocked
+		PSU x In Reserve
+		PSU x Not In Reserve
+		Compensation Charge Activated
+		Battery x Capacity Control
+		Special Functions Disabled"
+	::= 3
+END
+
+
+-- This MIB was created using NuDesign Team's Visual MIBuilder (Ver 4.9).
+

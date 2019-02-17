@@ -1,3 +1,5 @@
+#define NUMOFSETTINGS	4
+
 #include <rtl.h>
 
 #ifdef UKU_TELECORE2016
@@ -729,6 +731,7 @@
 
 extern short web_cnt_main;
 extern short web_cnt_2hz;
+extern const char* web_str;
 extern char web_plazma[5];
 
 //***********************************************

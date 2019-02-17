@@ -74,6 +74,20 @@ typedef struct {
 } MY_BUF;
 #define MYBUF(p)        ((MY_BUF *)p)
 
+
+
+char* http_tm_src_output(char numOfSrc)
+{
+char buffer[100];
+//char* buffer;
+sprintf(buffer,"%d %d %d %d 0x%02x", bps[numOfSrc]._Uii, bps[numOfSrc]._Ii, bps[numOfSrc]._Ti, bps[numOfSrc]._state, bps[numOfSrc]._flags_tm );
+
+return buffer;
+}
+
+
+
+
 /*----------------------------------------------------------------------------
  * HTTP Server Common Gateway Interface Functions
  *---------------------------------------------------------------------------*/
@@ -86,6 +100,8 @@ void cgi_process_var (U8 *qs) {
   /*.The Querry_String.is SPACE terminated.                                */
   U8 *var;
   int s[4];
+
+	web_plazma[1]++;
 
   var = (U8 *)alloc_mem (40);
   do {
@@ -158,6 +174,9 @@ void cgi_process_data (U8 code, U8 *dat, U16 len) {
   /*   len   - received data length                                         */
   U8 passw[12],retyped[12];
   U8 *var,stpassw;
+web_plazma[2]++;
+web_plazma[3]+=len;
+
 
   switch (code) {
     case 0:
@@ -181,34 +200,22 @@ void cgi_process_data (U8 code, U8 *dat, U16 len) {
   do {
     /* Parse all returned parameters. */
     dat = http_get_var (dat, var, 40);
+
     if (var[0] != 0) {
       /* Parameter found, returned string is non 0-length. */
-      if (str_scomp (var, "led0=on") == __TRUE) {
-        P2 |= 0x01;
+      if (str_scomp (var, "but=but0") == __TRUE) {
+        //web_plazma[4]=0;
       }
-      else if (str_scomp (var, "led1=on") == __TRUE) {
-        P2 |= 0x02;
+      else if (str_scomp (var, "but=but1") == __TRUE) {
+        //web_plazma[4]=1;
+		if(strstr(var, "pl"))web_plazma[1]++;
+		else if(strstr(var, "mi"))web_plazma[1]--;
       }
-      else if (str_scomp (var, "led2=on") == __TRUE) {
-        P2 |= 0x04;
+      else if (str_scomp (var, "but=but2") == __TRUE) {
+        //web_plazma[4]=2;
       }
-      else if (str_scomp (var, "led3=on") == __TRUE) {
-        P2 |= 0x08;
-      }
-      else if (str_scomp (var, "led4=on") == __TRUE) {
-        P2 |= 0x10;
-      }
-      else if (str_scomp (var, "led5=on") == __TRUE) {
-        P2 |= 0x20;
-      }
-      else if (str_scomp (var, "led6=on") == __TRUE) {
-        P2 |= 0x40;
-      }
-      else if (str_scomp (var, "led7=on") == __TRUE) {
-        P2 |= 0x80;
-      }
-      else if (str_scomp (var, "ctrl=Browser") == __TRUE) {
-        /////LEDrun = __FALSE;
+      else if (str_scomp (var, "but=but3") == __TRUE) {
+        //web_plazma[4]=3;
       }
       else if (str_scomp (var, "pw=") == __TRUE) {
         /* Change password. */
@@ -362,9 +369,44 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
       }
       break;
 
-    case 'd':
-      /* System password - file 'system.cgi' */
-      switch (env[2]) {
+	case 'd':
+		// Описание системы
+		
+		switch (env[1]) {
+			case '0':
+				
+				switch (env[2]) {
+					case '1':
+	
+					break;
+			        case '2':
+			          
+					break;
+			        case '3':
+			          
+					break;
+			        case '4':  	//количество батарей
+						web_plazma[4]++;
+			          	len = sprintf((char *)buf,(const char *)&env[4],2);
+					break;
+			        case '5':	//количество источников
+						len = sprintf((char *)buf,(const char *)&env[4],7);
+					break;
+			        case '6':	//количество инверторов
+			          	len = sprintf((char *)buf,(const char *)&env[4],5);
+					break;
+			        case '7': 	//количество байпасов
+			          	len = sprintf((char *)buf,(const char *)&env[4],3);
+					break;
+				}
+		  	break;
+		}
+	break;
+
+
+/*   case 'd':
+      // System password - file 'system.cgi' 
+	    switch (env[2]) {
         case '1':
           len = sprintf((char *)buf,(const char *)&env[4],
                         http_EnAuth ? "Enabled" : "Disabled");
@@ -374,7 +416,7 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
           break;
       }
       break;
-
+*/
     case 'e':
       /* Browser Language - file 'language.cgi' */
       lang = http_get_lang();
@@ -445,6 +487,111 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
      		case '2':
           		len = sprintf((char *)buf,(const char *)&env[3],web_cnt_main);
           		break;
+     		case '3':
+          		len = sprintf((char *)buf,(const char *)&env[3],web_str);
+          		break;
+		}
+		break;
+
+    case 's':
+		/* телеметрия источников */
+      	switch (env[1]) {
+        	case '0':
+          		switch (env[2]) {
+		        	case '0':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(0));
+		          		break;
+		     		case '1':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(1));
+		          		break;
+		     		case '2':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(2));
+		          		break;
+		     		case '3':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(3));
+		          		break;
+		     		case '4':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(4));
+		          		break;
+		        	case '5':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(5));
+		          		break;
+		     		case '6':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(6));
+		          		break;
+		     		case '7':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(7));
+		          		break;
+		     		case '8':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(8));
+		          		break;
+		     		case '9':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(9));
+		          		break;
+				}
+				break;
+        	case '1':
+          		switch (env[2]) {
+		        	case '0':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(10));
+		          		break;
+		     		case '1':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(11));
+		          		break;
+		     		case '2':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(12));
+		          		break;
+		     		case '3':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(13));
+		          		break;
+		     		case '4':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(14));
+		          		break;
+		        	case '5':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(15));
+		          		break;
+		     		case '6':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(16));
+		          		break;
+		     		case '7':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(17));
+		          		break;
+		     		case '8':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(18));
+		          		break;
+		     		case '9':
+		          		len = sprintf((char *)buf,(const char *)&env[4],http_tm_src_output(19));
+		          		break;
+				}
+				break;
+		}
+		break;
+
+    case 'y':
+		/* меню установок */
+      	switch (env[1]) {
+        	case 'n':
+          		len = sprintf((char *)buf,(const char *)&env[3],NUMOFSETTINGS);
+          		break;
+        	case '0':
+          		switch (env[2]) {
+		        	case '1':
+		          		len = sprintf((char *)buf,(const char *)&env[4],web_plazma[0]," ");
+		          		break;
+		     		case '2':
+		          		len = sprintf((char *)buf,(const char *)&env[4],web_plazma[1]," ");
+		          		break;
+		     		case '3':
+		          		len = sprintf((char *)buf,(const char *)&env[4],22954," ");
+		          		break;
+		     		case '4':
+		          		len = sprintf((char *)buf,(const char *)&env[4],0,"abcdef");
+		          		break;
+		     		case '5':
+		          		len = sprintf((char *)buf,(const char *)&env[4],0,"ghij");
+		          		break;
+				}
+				break;
 		}
 		break;
 
@@ -454,18 +601,22 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
       len = sprintf((char *)buf,(const char *)&env[1],adv);
       break;
 
-    case 'y':
+    case '2':
       /* Button state - xml file 'button.cgx' */
 	  web_plazma[0]++;
       len = sprintf((char *)buf,"<checkbox><id>button%c</id><on>%s</on></checkbox>",
                     env[1],(/*web_cnt_main*/3 & (1 << (env[1]-'0'))) ? "true" : "false");
       break;
-    case 'z':
+    case '3':
       /* Button state - xml file 'button.cgx' */
 	  web_plazma[0]++;
       len = sprintf((char *)buf,"<checkbox><id>button%c</id><on>%s</on></checkbox>",
                     env[1],(/*web_cnt_main*/ 6 & (1 << (env[1]-'0'))) ? "true" : "false");
       break;
+    case 'z':
+		/* конец файла */
+      	len = sprintf((char *)buf,(const char *)&env[2],"end");
+   		break;
   }
   return ((U16)len);
 }
