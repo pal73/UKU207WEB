@@ -89,11 +89,17 @@
 			$.getJSON( "uku.cgx", data, success );
 		}
 		
+		function palDecoder(input) {
+			var output = "";
+			
+		}
 	 	function success ( inputData ) {
 			numOfBat=inputData.numOfBat;
 			numOfSrc=inputData.numOfSrc;
 			numOfInv=inputData.numOfInv;
 			numOfBypas=inputData.numOfBypas;
+			productModel=inputData.model;
+			document.getElementById("header").innerHTML=palDecoder(productModel);
 
 			if(numOfSrc) {
 				for(var i=0; i<numOfSrc; i++) {
