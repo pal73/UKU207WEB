@@ -96,7 +96,24 @@
 		
 		function palDecoder(input) {
 			var output = "";
-			
+		
+			for (var i = 0; i < input.length; i++){
+
+	            var outputSign = input.charCodeAt(i);  
+
+	            if (outputSign == 0xc0){
+	                output += "А";
+	            } else if (outputSign == 0xc1){
+	                output += "Б";
+	            } else if (outputSign == "i"){
+	                output += 1;                    
+	            } else if (outputSign == "o"){
+	                output += 0;
+	            } else {
+	            output += outputSign;
+	            }	
+	        }
+	        return output;
 		}
 	 	function success ( inputData ) {
 			numOfBat=inputData.numOfBat;
@@ -224,26 +241,7 @@ natoque penatibus et magnis dis parturient montes, nascetur ridiculus
 mus.</p>
 		
 		<h3>Consectetuer adipiscing elit</h3>
-		<p>Nulla dictum. Praesent turpis libero, pretium in, pretium ac, 
-malesuada sed, ligula. Sed a urna eu ipsum luctus faucibus. Curabitur 
-fringilla. Suspendisse sit amet quam. Sed vel pede id libero luctus 
-fermentum. Vestibulum volutpat tempor lectus. Vivamus convallis tempus 
-ante. Nullam adipiscing dui blandit ipsum. Nullam convallis lacus ut 
-quam. Mauris semper elit at ante. Vivamus tristique. Pellentesque 
-pharetra ante at pede. In ultrices arcu vitae purus. In rutrum, erat at 
-mollis consequat, leo massa consequat libero, ac vestibulum libero 
-tellus sed risus. Lorem ipsum dolor sit amet, consectetuer adipiscing 
-elit.</p>
-		<p>Maecenas eu velit nec magna venenatis consequat. In neque. Vivamus 
-pellentesque, lacus eu aliquet semper, lorem metus rhoncus metus, a 
-ornare orci ante a diam. Nunc sem nisl, aliquet quis, elementum nec, 
-imperdiet in, wisi. Proin in lorem. Etiam molestie diam eget ante. Morbi
- quis tortor id lacus mollis venenatis. Lorem ipsum dolor sit amet, 
-consectetuer adipiscing elit. Aliquam vel orci sit amet tellus mollis 
-eleifend. Donec urna diam, viverra eget, ultricies gravida, ultrices eu,
- erat. Proin vel arcu. Sed diam. Cras hendrerit arcu sed augue. Sed 
-justo felis, luctus a, accumsan in, tincidunt facilisis, libero. 
-Phasellus eu eros.</p>
+
 
 	</div>
 	<div id="sidebar">
