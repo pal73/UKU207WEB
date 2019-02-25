@@ -899,21 +899,33 @@ localm[NETIF_ETH].DefGW[1]=lc640_read_int(EE_ETH_GW_2);
 localm[NETIF_ETH].DefGW[2]=lc640_read_int(EE_ETH_GW_3);
 localm[NETIF_ETH].DefGW[3]=lc640_read_int(EE_ETH_GW_4);
 */	
-
+/*
 localm[NETIF_ETH].IpAdr[0]=192;
 localm[NETIF_ETH].IpAdr[1]=168;
 localm[NETIF_ETH].IpAdr[2]=0;
 localm[NETIF_ETH].IpAdr[3]=20;
+*/
+
+localm[NETIF_ETH].IpAdr[0]=192;
+localm[NETIF_ETH].IpAdr[1]=168;
+localm[NETIF_ETH].IpAdr[2]=1;
+localm[NETIF_ETH].IpAdr[3]=35;
 
 localm[NETIF_ETH].NetMask[0]=255;
 localm[NETIF_ETH].NetMask[1]=255;
 localm[NETIF_ETH].NetMask[2]=255;
 localm[NETIF_ETH].NetMask[3]=0;
-
+/*
 localm[NETIF_ETH].DefGW[0]=192;
 localm[NETIF_ETH].DefGW[1]=168;
 localm[NETIF_ETH].DefGW[2]=2;
-localm[NETIF_ETH].DefGW[3]=1;  
+localm[NETIF_ETH].DefGW[3]=1; 
+*/
+
+localm[NETIF_ETH].DefGW[0]=192;
+localm[NETIF_ETH].DefGW[1]=168;
+localm[NETIF_ETH].DefGW[2]=1;
+localm[NETIF_ETH].DefGW[3]=254; 
 }
 
 
@@ -1448,7 +1460,7 @@ if(ind==iMn)
 	int2lcdyx(a_ind.s_i1,0,10,0);
 	*/	/*int2lcdyx(adc_zero_cnt,1,5,0);
 
-	int2lcdyx(adc_window_flag,0,1,0);
+	int2lcdyx(LocM.IpAdr[0],0,1,0);
 	int2lcdyx(adc_window_cnt,0,6,0);
 	int2lcdyx(net_buff_,0,19,0);
 	int2lcdyx(adc_gorb_cnt,0,10,0);*/
@@ -1462,7 +1474,12 @@ if(ind==iMn)
 	int2lcdyx(web_plazma[3],1,15,0);
 	int2lcdyx(web_plazma[4],1,19,0);
 	int2lcdyx(bps[0]._Uii,2,3,0); 
-	int2lcdyx(bps[1]._Uii,3,3,0);		
+	int2lcdyx(bps[1]._Uii,3,3,0);
+
+	int2lcdyx(localm[NETIF_ETH].IpAdr[0],2,7,0);
+	int2lcdyx(localm[NETIF_ETH].IpAdr[1],2,11,0);
+	int2lcdyx(localm[NETIF_ETH].IpAdr[2],2,15,0);
+	int2lcdyx(localm[NETIF_ETH].IpAdr[3],2,19,0);		
 	}
 else if (ind==iLan_set)
 	{
@@ -3310,7 +3327,7 @@ snmp_Community[8]=(char)lc640_read_int(EE_COMMUNITY+16);
 if((snmp_Community[8]==0)||(snmp_Community[8]==' '))snmp_Community[8]=0;
 snmp_Community[9]=0; /**/
 
-if(lc640_read_int(EE_ETH_IS_ON)==1)
+//if(lc640_read_int(EE_ETH_IS_ON)==1)
 	{
 	bgnd_par(		"                    ",
      		"    Инициализация   ",
