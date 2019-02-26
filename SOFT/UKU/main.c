@@ -880,6 +880,167 @@ if(in<0)return -in;
 else return in;
 }
 
+
+//-----------------------------------------------
+char* pal_cyr_coder(char* in)
+{
+char output[200];
+short i=0,ii=0;
+
+while(in[i])
+	{
+	if(in[i]=='À')
+		{
+		output[ii++]='^';
+		output[ii++]='A';
+		i++;
+		}
+	else if(in[i]=='Á')
+		{
+		output[ii++]='^';
+		output[ii++]='B';
+		i++;
+		}
+	else if(in[i]=='Â')
+		{
+		output[ii++]='^';
+		output[ii++]='V';
+		i++;
+		}
+	else if(in[i]=='Ã')
+		{
+		output[ii++]='^';
+		output[ii++]='G';
+		i++;
+		}
+	else if(in[i]=='Ä')
+		{
+		output[ii++]='^';
+		output[ii++]='D';
+		i++;
+		}
+	else if(in[i]=='Å')
+		{
+		output[ii++]='^';
+		output[ii++]='E';
+		i++;
+		}
+	else if(in[i]=='¨')
+		{
+		output[ii++]='^';
+		output[ii++]='1';
+		i++;
+		}
+	else if(in[i]=='Æ')
+		{
+		output[ii++]='^';
+		output[ii++]='3';
+		i++;
+		}
+	else if(in[i]=='Ç')
+		{
+		output[ii++]='^';
+		output[ii++]='Z';
+		i++;
+		}
+	else if(in[i]=='È')
+		{
+		output[ii++]='^';
+		output[ii++]='I';
+		i++;
+		}
+	else if(in[i]=='Ê')
+		{
+		output[ii++]='^';
+		output[ii++]='K';
+		i++;
+		}
+	else if(in[i]=='Ë')
+		{
+		output[ii++]='^';
+		output[ii++]='L';
+		i++;
+		}
+	else if(in[i]=='Ì')
+		{
+		output[ii++]='^';
+		output[ii++]='M';
+		i++;
+		}
+	else if(in[i]=='Í')
+		{
+		output[ii++]='^';
+		output[ii++]='N';
+		i++;
+		}
+	else if(in[i]=='Î')
+		{
+		output[ii++]='^';
+		output[ii++]='O';
+		i++;
+		}
+	else if(in[i]=='Ï')
+		{
+		output[ii++]='^';
+		output[ii++]='P';
+		i++;
+		}
+	else if(in[i]=='Ð')
+		{
+		output[ii++]='^';
+		output[ii++]='R';
+		i++;
+		}
+	else if(in[i]=='Ñ')
+		{
+		output[ii++]='^';
+		output[ii++]='C';
+		i++;
+		}
+	else if(in[i]=='Ò')
+		{
+		output[ii++]='^';
+		output[ii++]='T';
+		i++;
+		}
+	else if(in[i]=='Ó')
+		{
+		output[ii++]='^';
+		output[ii++]='U';
+		i++;
+		}
+	else if(in[i]=='Ô')
+		{
+		output[ii++]='^';
+		output[ii++]='F';
+		i++;
+		}
+	else if(in[i]=='Õ')
+		{
+		output[ii++]='^';
+		output[ii++]='H';
+		i++;
+		}
+	else if(in[i]=='Ö')
+		{
+		output[ii++]='^';
+		output[ii++]='C';
+		i++;
+		}
+	else
+		{
+		output[ii++]=in[i++];
+		}
+	}
+output[ii++]=0;	
+/*
+for(i=0;i<4;i++)
+	{
+	output[ii++]=in[i++];
+	}  */
+return output;
+}
+
 //-----------------------------------------------
 void init_ETH(void)
 {
@@ -899,33 +1060,33 @@ localm[NETIF_ETH].DefGW[1]=lc640_read_int(EE_ETH_GW_2);
 localm[NETIF_ETH].DefGW[2]=lc640_read_int(EE_ETH_GW_3);
 localm[NETIF_ETH].DefGW[3]=lc640_read_int(EE_ETH_GW_4);
 */	
-
+/*
 localm[NETIF_ETH].IpAdr[0]=192;
 localm[NETIF_ETH].IpAdr[1]=168;
 localm[NETIF_ETH].IpAdr[2]=0;
 localm[NETIF_ETH].IpAdr[3]=20;
+*/
 
-/*
 localm[NETIF_ETH].IpAdr[0]=192;
 localm[NETIF_ETH].IpAdr[1]=168;
 localm[NETIF_ETH].IpAdr[2]=1;
 localm[NETIF_ETH].IpAdr[3]=35;
-*/
+
 localm[NETIF_ETH].NetMask[0]=255;
 localm[NETIF_ETH].NetMask[1]=255;
 localm[NETIF_ETH].NetMask[2]=255;
 localm[NETIF_ETH].NetMask[3]=0;
-
+/*
 localm[NETIF_ETH].DefGW[0]=192;
 localm[NETIF_ETH].DefGW[1]=168;
 localm[NETIF_ETH].DefGW[2]=2;
 localm[NETIF_ETH].DefGW[3]=1; 
+*/
 
-/*
 localm[NETIF_ETH].DefGW[0]=192;
 localm[NETIF_ETH].DefGW[1]=168;
 localm[NETIF_ETH].DefGW[2]=1;
-localm[NETIF_ETH].DefGW[3]=254; */
+localm[NETIF_ETH].DefGW[3]=254; 
 }
 
 
