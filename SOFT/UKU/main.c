@@ -949,6 +949,12 @@ while(in[i])
 		output[ii++]='I';
 		i++;
 		}
+	else if(in[i]=='É')
+		{
+		output[ii++]='^';
+		output[ii++]='5';
+		i++;
+		}
 	else if(in[i]=='Ê')
 		{
 		output[ii++]='^';
