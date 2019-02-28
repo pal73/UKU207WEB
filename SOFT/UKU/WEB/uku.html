@@ -84,6 +84,42 @@
 		var numOfInv=0;
 		var numOfBypas=0;	
 		var src_data= new Array(16);
+		var palDict = {
+			A : "А",
+			B : "Б",
+			C : "Ц",
+			D : "Д",
+			E : "Е",
+			F : "Ф",
+			G : "Г",
+			H : "Х",
+			I : "И",
+			J : "Й",
+			K : "К",
+			L : "Л",
+			M : "М",
+			N : "Н",
+			O : "О",
+			P : "П",
+			Q : "Я",
+			R : "Р",
+			S : "С",
+			T : "Т",
+			U : "У",
+			V : "Ю",
+			W : "В",
+			X : "Ш",
+			Y : "Ч",
+			Z : "З",
+			1 : "Ё",
+			3 : "Ж",
+			5 : "Щ",
+			7 : "Ъ",
+			9 : "Ы"/*,
+			A1 : "Ь",
+			A2 : "Э"*/
+
+		};
 	  
 	  	$( function() {
 			console.log("Страница загружена");
@@ -95,9 +131,9 @@
 		}
 		
 		function palDecoder(input) {
-			var output = "";
+			var output = "",i=0;
 		
-			for (var i = 0; i < input.length; i++){
+			/*for (var i = 0; i < input.length; i++){
 
 	            var outputSign = input.charCodeAt(i);  
 
@@ -112,6 +148,18 @@
 	            } else {
 	            output += outputSign;
 	            }	
+	        }*/
+
+	        while (input[i]){
+	        	if(input[i++]=='^'){
+	        		/*if(input[i]=='A')output += 'А';
+	        		else if(input[i]=='B')output += 'Б';*/
+	        		output += palDict[input[i]];
+	        		i++;
+	        	}
+	        	else {
+	        		output +=input[i];
+	        	}
 	        }
 	        return output;
 		}

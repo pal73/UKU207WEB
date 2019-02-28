@@ -378,7 +378,7 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
 				switch (env[2]) {
 					case '1':
 						//len = sprintf((char *)buf,(const char *)&env[4],pal_cyr_coder("ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÜÛÚİŞß1?°àáâãäå¸æçèéêëìíîïğñòóôõö÷øùüûúışÿ"));
-						len = sprintf((char *)buf,(const char *)&env[4],pal_cyr_coder("ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎ"));
+						len = sprintf((char *)buf,(const char *)&env[4],pal_cyr_coder("ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÜÛÚİŞß1?°àáâãäå¸æçèéêëìíîïğñòóôõö÷øùüûúışÿ"));
 					break;
 			        case '2':
 			          

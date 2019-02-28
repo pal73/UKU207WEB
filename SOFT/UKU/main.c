@@ -808,6 +808,9 @@ char plazma_stark[32];
 
 U8 socket_tcp;
 
+char pal_cyr_coder_output[200];
+
+
 //-----------------------------------------------
 //Ресурс вентиляторов
 //char vent_resurs_temp[4];
@@ -884,8 +887,9 @@ else return in;
 //-----------------------------------------------
 char* pal_cyr_coder(char* in)
 {
-char output[200];
+char* output;
 short i=0,ii=0;
+output = pal_cyr_coder_output;
 
 while(in[i])
 	{
@@ -1033,11 +1037,71 @@ while(in[i])
 		output[ii++]='C';
 		i++;
 		}
+	else if(in[i]=='Ч')
+		{
+		output[ii++]='^';
+		output[ii++]='R';
+		i++;
+		}
+	else if(in[i]=='Ш')
+		{
+		output[ii++]='^';
+		output[ii++]='C';
+		i++;
+		}
+	else if(in[i]=='Щ')
+		{
+		output[ii++]='^';
+		output[ii++]='T';
+		i++;
+		}
+	else if(in[i]=='Ъ')
+		{
+		output[ii++]='^';
+		output[ii++]='U';
+		i++;
+		}
+	else if(in[i]=='Ы')
+		{
+		output[ii++]='^';
+		output[ii++]='F';
+		i++;
+		}
+	else if(in[i]=='Ь')
+		{
+		output[ii++]='^';
+		output[ii++]='H';
+		i++;
+		}
+	else if(in[i]=='Э')
+		{
+		output[ii++]='^';
+		output[ii++]='C';
+		i++;
+		}
+	else if(in[i]=='Ю')
+		{
+		output[ii++]='^';
+		output[ii++]='C';
+		i++;
+		}
+	else if(in[i]=='Я')
+		{
+		output[ii++]='^';
+		output[ii++]='C';
+		i++;
+		}
 	else
 		{
 		output[ii++]=in[i++];
 		}
 	}
+
+/*while(in[i])
+	{
+	output[ii++]=in[i++];
+	}*/
+
 output[ii++]=0;	
 /*
 for(i=0;i<4;i++)
