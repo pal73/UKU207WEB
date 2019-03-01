@@ -108,16 +108,51 @@
 			U : "У",
 			V : "Ю",
 			W : "В",
-			X : "Ш",
+			XA : "Ш",
 			Y : "Ч",
 			Z : "З",
-			1 : "Ё",
-			3 : "Ж",
-			5 : "Щ",
-			7 : "Ъ",
-			9 : "Ы"/*,
-			A1 : "Ь",
-			A2 : "Э"*/
+			XE : "Ё",
+			XC : "Ж",
+			XD : "Щ",
+			XB : "Ъ",
+			XF : "Ы",
+			XG : "Ь",
+			XH : "Э",
+			a : "а",
+			b : "б",
+			c : "ц",
+			d : "д",
+			e : "е",
+			f : "ф",
+			g : "г",
+			h : "х",
+			i : "и",
+			j : "й",
+			k : "к",
+			l : "л",
+			m : "м",
+			n : "н",
+			o : "о",
+			p : "п",
+			q : "я",
+			r : "р",
+			s : "с",
+			t : "т",
+			u : "у",
+			v : "ю",
+			w : "в",
+			Xa : "ш",
+			y : "ч",
+			z : "з",
+			Xe : "ё",
+			Xc : "ж",
+			Xd : "щ",
+			Xb : "ъ",
+			Xf : "ы",
+			Xg : "ь",
+			Xh : "э",
+			Xi : "°",
+			Xj : "№"
 
 		};
 	  
@@ -151,14 +186,18 @@
 	        }*/
 
 	        while (input[i]){
-	        	if(input[i++]=='^'){
-	        		/*if(input[i]=='A')output += 'А';
-	        		else if(input[i]=='B')output += 'Б';*/
-	        		output += palDict[input[i]];
+	        	if(input[i]=='^'){
+	        		if(input[++i]=='X'){
+	        			output+=palDict[input[i]+input[i+1]];
+	        			i++;
+	        			i++;
+	        		}
+	        		else {output += palDict[input[i]];
 	        		i++;
+	        		}
 	        	}
 	        	else {
-	        		output +=input[i];
+	        		output +=input[i++];
 	        	}
 	        }
 	        return output;
@@ -294,21 +333,8 @@ mus.</p>
 	</div>
 	<div id="sidebar">
 		<ul>
-			<li><a href="http://ruseller.com">Ссылка 1</a></li>
-			<li><a href="http://ruseller.com">Ссылка 2</a></li>
-			<li><a href="http://ruseller.com">Ссылка 3</a></li>
-			<li><a href="http://ruseller.com">Ссылка 4</a></li>
-			<li><a href="http://ruseller.com">Ссылка 5</a></li>
-			<li><a href="http://ruseller.com">Ссылка 6</a></li>
-			<li><a href="http://ruseller.com">Ссылка 7</a></li>
-			<li><a href="http://ruseller.com">Ссылка 8</a></li>
-			<li><a href="http://ruseller.com">Ссылка 9</a></li>
-			<li><a href="http://ruseller.com">Ссылка 10</a></li>
-			<li><a href="http://ruseller.com">Ссылка 11</a></li>
-			<li><a href="http://ruseller.com">Ссылка 12</a></li>
-			<li><a href="http://ruseller.com">Ссылка 13</a></li>
-			<li><a href="http://ruseller.com">Ссылка 14</a></li>
-			<li><a href="http://ruseller.com">Ссылка 15</a></li>
+			<li><a href="http://ruseller.com">Установки</a></li>
+			<li><a href="http://ruseller.com">Журнал событий</a></li>
 		</ul>
 	</div>
 	<div id="footer">

@@ -908,7 +908,7 @@ while(in[i])
 	else if(in[i]=='Â')
 		{
 		output[ii++]='^';
-		output[ii++]='V';
+		output[ii++]='W';
 		i++;
 		}
 	else if(in[i]=='Ã')
@@ -932,13 +932,15 @@ while(in[i])
 	else if(in[i]=='¨')
 		{
 		output[ii++]='^';
-		output[ii++]='1';
+		output[ii++]='X';
+		output[ii++]='E';
 		i++;
 		}
 	else if(in[i]=='Æ')
 		{
 		output[ii++]='^';
-		output[ii++]='3';
+		output[ii++]='X';
+		output[ii++]='C';
 		i++;
 		}
 	else if(in[i]=='Ç')
@@ -956,7 +958,7 @@ while(in[i])
 	else if(in[i]=='É')
 		{
 		output[ii++]='^';
-		output[ii++]='5';
+		output[ii++]='J';
 		i++;
 		}
 	else if(in[i]=='Ê')
@@ -1004,7 +1006,7 @@ while(in[i])
 	else if(in[i]=='Ñ')
 		{
 		output[ii++]='^';
-		output[ii++]='C';
+		output[ii++]='S';
 		i++;
 		}
 	else if(in[i]=='Ò')
@@ -1040,55 +1042,281 @@ while(in[i])
 	else if(in[i]=='×')
 		{
 		output[ii++]='^';
-		output[ii++]='R';
+		output[ii++]='Y';
 		i++;
 		}
 	else if(in[i]=='Ø')
 		{
 		output[ii++]='^';
-		output[ii++]='C';
+		output[ii++]='X';
+		output[ii++]='A';
 		i++;
 		}
 	else if(in[i]=='Ù')
 		{
 		output[ii++]='^';
-		output[ii++]='T';
+		output[ii++]='X';
+		output[ii++]='D';
 		i++;
 		}
 	else if(in[i]=='Ú')
 		{
 		output[ii++]='^';
-		output[ii++]='U';
+		output[ii++]='X';
+		output[ii++]='B';
 		i++;
 		}
 	else if(in[i]=='Û')
 		{
 		output[ii++]='^';
+		output[ii++]='X';
 		output[ii++]='F';
 		i++;
 		}
 	else if(in[i]=='Ü')
 		{
 		output[ii++]='^';
-		output[ii++]='H';
+		output[ii++]='X';
+		output[ii++]='G';
 		i++;
 		}
 	else if(in[i]=='İ')
 		{
 		output[ii++]='^';
-		output[ii++]='C';
+		output[ii++]='X';
+		output[ii++]='H';
 		i++;
 		}
 	else if(in[i]=='Ş')
 		{
 		output[ii++]='^';
-		output[ii++]='C';
+		output[ii++]='V';
 		i++;
 		}
 	else if(in[i]=='ß')
 		{
 		output[ii++]='^';
-		output[ii++]='C';
+		output[ii++]='Q';
+		i++;
+		}
+	else if(in[i]=='à')
+		{
+		output[ii++]='^';
+		output[ii++]='a';
+		i++;
+		}
+	else if(in[i]=='á')
+		{
+		output[ii++]='^';
+		output[ii++]='b';
+		i++;
+		}
+	else if(in[i]=='â')
+		{
+		output[ii++]='^';
+		output[ii++]='w';
+		i++;
+		}
+	else if(in[i]=='ã')
+		{
+		output[ii++]='^';
+		output[ii++]='g';
+		i++;
+		}
+	else if(in[i]=='ä')
+		{
+		output[ii++]='^';
+		output[ii++]='d';
+		i++;
+		}
+	else if(in[i]=='å')
+		{
+		output[ii++]='^';
+		output[ii++]='e';
+		i++;
+		}
+	else if(in[i]=='¸')
+		{
+		output[ii++]='^';
+		output[ii++]='X';
+		output[ii++]='e';
+		i++;
+		}
+	else if(in[i]=='æ')
+		{
+		output[ii++]='^';
+		output[ii++]='X';
+		output[ii++]='c';
+		i++;
+		}
+	else if(in[i]=='ç')
+		{
+		output[ii++]='^';
+		output[ii++]='z';
+		i++;
+		}
+	else if(in[i]=='è')
+		{
+		output[ii++]='^';
+		output[ii++]='i';
+		i++;
+		}
+	else if(in[i]=='é')
+		{
+		output[ii++]='^';
+		output[ii++]='j';
+		i++;
+		}
+	else if(in[i]=='ê')
+		{
+		output[ii++]='^';
+		output[ii++]='k';
+		i++;
+		}
+	else if(in[i]=='ë')
+		{
+		output[ii++]='^';
+		output[ii++]='l';
+		i++;
+		}
+	else if(in[i]=='ì')
+		{
+		output[ii++]='^';
+		output[ii++]='m';
+		i++;
+		}
+	else if(in[i]=='í')
+		{
+		output[ii++]='^';
+		output[ii++]='n';
+		i++;
+		}
+	else if(in[i]=='î')
+		{
+		output[ii++]='^';
+		output[ii++]='o';
+		i++;
+		}
+	else if(in[i]=='ï')
+		{
+		output[ii++]='^';
+		output[ii++]='p';
+		i++;
+		}
+	else if(in[i]=='ğ')
+		{
+		output[ii++]='^';
+		output[ii++]='r';
+		i++;
+		}
+	else if(in[i]=='ñ')
+		{
+		output[ii++]='^';
+		output[ii++]='s';
+		i++;
+		}
+	else if(in[i]=='ò')
+		{
+		output[ii++]='^';
+		output[ii++]='t';
+		i++;
+		}
+	else if(in[i]=='ó')
+		{
+		output[ii++]='^';
+		output[ii++]='u';
+		i++;
+		}
+	else if(in[i]=='ô')
+		{
+		output[ii++]='^';
+		output[ii++]='f';
+		i++;
+		}
+	else if(in[i]=='õ')
+		{
+		output[ii++]='^';
+		output[ii++]='h';
+		i++;
+		}
+	else if(in[i]=='ö')
+		{
+		output[ii++]='^';
+		output[ii++]='c';
+		i++;
+		}
+	else if(in[i]=='÷')
+		{
+		output[ii++]='^';
+		output[ii++]='y';
+		i++;
+		}
+	else if(in[i]=='ø')
+		{
+		output[ii++]='^';
+		output[ii++]='X';
+		output[ii++]='a';
+		i++;
+		}
+	else if(in[i]=='ù')
+		{
+		output[ii++]='^';
+		output[ii++]='X';
+		output[ii++]='d';
+		i++;
+		}
+	else if(in[i]=='ú')
+		{
+		output[ii++]='^';
+		output[ii++]='X';
+		output[ii++]='b';
+		i++;
+		}
+	else if(in[i]=='û')
+		{
+		output[ii++]='^';
+		output[ii++]='X';
+		output[ii++]='f';
+		i++;
+		}
+	else if(in[i]=='ü')
+		{
+		output[ii++]='^';
+		output[ii++]='X';
+		output[ii++]='g';
+		i++;
+		}
+	else if(in[i]=='ı')
+		{
+		output[ii++]='^';
+		output[ii++]='X';
+		output[ii++]='h';
+		i++;
+		}
+	else if(in[i]=='ş')
+		{
+		output[ii++]='^';
+		output[ii++]='v';
+		i++;
+		}
+	else if(in[i]=='ÿ')
+		{
+		output[ii++]='^';
+		output[ii++]='q';
+		i++;
+		}
+	else if(in[i]=='°')
+		{
+		output[ii++]='^';
+		output[ii++]='X';
+		output[ii++]='i';
+		i++;
+		}
+	else if(in[i]=='¹')
+		{
+		output[ii++]='^';
+		output[ii++]='X';
+		output[ii++]='j';
 		i++;
 		}
 	else
