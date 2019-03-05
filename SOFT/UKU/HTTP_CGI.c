@@ -85,7 +85,7 @@ sprintf(buffer,"%d %d %d %d 0x%02x", bps[numOfSrc]._Uii, bps[numOfSrc]._Ii, bps[
 return buffer;
 }
 
-
+char log_item_cnt=0;
 
 
 /*----------------------------------------------------------------------------
@@ -493,6 +493,26 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
           		break;
 		}
 		break;
+
+	case 'l':
+		// журнал
+		switch (env[1]) {
+			case 'd':
+          		len = sprintf((char *)buf,(const char *)&env[3],10);
+          		break;
+			case 'n':
+          		len = sprintf((char *)buf,(const char *)&env[3],log_item_cnt);
+				if(++log_item_cnt>=10)log_item_cnt=0;
+          		break;
+			case '0':
+				len = sprintf((char *)buf,(const char *)&env[3],pal_cyr_coder("10:15:24  26-сен-2019><11:17:29  03-окт-2019><Авария источника №1:завышено выходное напряжение"));
+				break;
+			case 'e':
+				len = sprintf((char *)buf,(const char *)&env[3],pal_cyr_coder("end"));
+				break;
+		}
+		break;
+
 
     case 's':
 		/* телеметрия источников */
