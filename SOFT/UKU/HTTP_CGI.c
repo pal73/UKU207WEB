@@ -505,7 +505,7 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
 				if(++log_item_cnt>=10)log_item_cnt=0;
           		break;
 			case '0':
-				len = sprintf((char *)buf,(const char *)&env[3],pal_cyr_coder("10:15:24  26-сен-2019><11:17:29  03-окт-2019><Авария источника №1:завышено выходное напряжение"));
+				len = sprintf((char *)buf,(const char *)&env[3],pal_cyr_coder("10:15:24><26-сен-2019><11:17:29  03-окт-2019><Авария источника №1:завышено выходное напряжение"));
 				break;
 			case 'e':
 				len = sprintf((char *)buf,(const char *)&env[3],pal_cyr_coder("end"));
