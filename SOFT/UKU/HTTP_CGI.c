@@ -155,6 +155,8 @@ void cgi_process_var (U8 *qs) {
   free_mem ((OS_FRAME *)var);
 }
 
+//action="/parole.cgx"
+//document.location.href = "http://www.site.ru"
 
 /*--------------------------- cgi_process_data ------------------------------*/
 
