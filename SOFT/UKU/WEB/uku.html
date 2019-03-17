@@ -210,8 +210,10 @@
 			numOfSrc=inputData.numOfSrc;
 			numOfInv=inputData.numOfInv;
 			numOfBypas=inputData.numOfBypas;
-			productModel=inputData.model;
-			document.getElementById("header").innerHTML=palDecoder(productModel);
+			//productModel=inputData.model;
+			document.getElementById("dev_name").innerHTML=palDecoder(inputData.model);
+			document.getElementById("dev_serial").innerHTML="S№"+palDecoder(inputData.serial);
+			document.getElementById("dev_place").innerHTML=palDecoder(inputData.place);
 
 			if(numOfSrc) {
 				for(var i=0; i<numOfSrc; i++) {
@@ -309,7 +311,11 @@
 </head>
 <body>
 <div id="wrap">
-	<div id="header"><h1>Простой 2-х колоночный шаблон CSS. Готово</h1></div>
+	<div id="dev_header">
+		<div id="dev_name"> </div>
+		<div id="dev_place"> </div>
+		<div id="dev_serial"> </div>
+	</div>
 	<div id="nav">
 		<ul>
 			<li><a href="http://ruseller.com">Опция 1</a></li>

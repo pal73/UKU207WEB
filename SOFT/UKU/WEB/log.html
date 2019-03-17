@@ -190,8 +190,9 @@
 	 	function success ( inputData ) {
 	 		deepOfLog=inputData.logDeep;
 			numOfLogItem=inputData.itemNumber;
-			/*productModel=inputData.model;*/
-			/*document.getElementById("header").innerHTML=palDecoder(productModel);*/
+			document.getElementById("dev_name").innerHTML=palDecoder(inputData.model);
+			document.getElementById("dev_serial").innerHTML="S№"+palDecoder(inputData.serial);
+			document.getElementById("dev_place").innerHTML=palDecoder(inputData.place);
 
 			if(deepOfLog) {
 				for(var i=0; i<deepOfLog; i++) {
@@ -268,7 +269,11 @@
 </head>
 <body>
 <div id="wrap">
-	<div id="header"><h1>Простой 2-х колоночный шаблон CSS. Готово</h1></div>
+	<div id="dev_header">
+		<div id="dev_name"> </div>
+		<div id="dev_place"> </div>
+		<div id="dev_serial"> </div>
+	</div>
 	<div id="nav">
 		<ul>
 			<li><a href="http://ruseller.com">Опция 1</a></li>
@@ -282,12 +287,7 @@
 		<h2 align = "middle">Колонка 1</h2>
 		<div id= "result"></div>
 		<p><a href="http://ruseller.com" target="_blank">RUSELLER.COM</a></p>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris 
-vel magna. Mauris risus nunc, tristique varius, gravida in, lacinia vel,
- elit. Nam ornare, felis non faucibus molestie, nulla augue adipiscing 
-mauris, a nonummy diam ligula ut risus. Praesent varius. Cum sociis 
-natoque penatibus et magnis dis parturient montes, nascetur ridiculus 
-mus.</p>
+		
 		
 		<h3>Consectetuer adipiscing elit</h3>
 

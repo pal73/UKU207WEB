@@ -283,37 +283,6 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
   switch (env[0]) {
     /* Analyze the environment string. It is the script 'c' line starting */
     /* at position 2. What you write to the script file is returned here. */
-    case 'a' :
-      /* Network parameters - file 'network.cgi' */
-      switch (env[2]) {
-        case 'i':
-          /* Write the local IP address. The format string is included */
-          /* in environment string of the script line.                 */
-          len = sprintf((char *)buf,(const char *)&env[4],/*web_cnt_main*/LocM.IpAdr[0],
-                        LocM.IpAdr[1],LocM.IpAdr[2],LocM.IpAdr[3]);
-          break;
-        case 'm':
-          /* Write local Net mask. */
-          len = sprintf((char *)buf,(const char *)&env[4],LocM.NetMask[0],
-                        LocM.NetMask[1],LocM.NetMask[2],LocM.NetMask[3]);
-          break;
-        case 'g':
-          /* Write default gateway address. */
-          len = sprintf((char *)buf,(const char *)&env[4],LocM.DefGW[0],
-                        LocM.DefGW[1],LocM.DefGW[2],LocM.DefGW[3]);
-          break;
-        case 'p':
-          /* Write primary DNS server address. */
-          len = sprintf((char *)buf,(const char *)&env[4],LocM.PriDNS[0],
-                        LocM.PriDNS[1],LocM.PriDNS[2],LocM.PriDNS[3]);
-          break;
-        case 's':
-          /* Write secondary DNS server address. */
-          len = sprintf((char *)buf,(const char *)&env[4],LocM.SecDNS[0],
-                        LocM.SecDNS[1],LocM.SecDNS[2],LocM.SecDNS[3]);
-          break;
-      }
-      break;
 
     case 'b':
       /* LED control - file 'led.cgi' */
@@ -380,13 +349,13 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
 				switch (env[2]) {
 					case '1':
 						//len = sprintf((char *)buf,(const char *)&env[4],pal_cyr_coder("АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯ1?°абвгдеёжзийклмнопрстуфхцчшщьыъэюя"));
-						len = sprintf((char *)buf,(const char *)&env[4],pal_cyr_coder("Uвых, Uвх, Iзар.макс., 3АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ1°№абвгдеёжзийклмнопрстуфхцчшщьыъэюя"));
+						len = sprintf((char *)buf,(const char *)&env[4],pal_cyr_coder("ИБЭП220/48-80А-4/4"));
 					break;
 			        case '2':
-			          
+			          	len = sprintf((char *)buf,(const char *)&env[4],/*pal_cyr_coder(*/11234856);
 					break;
 			        case '3':
-			          
+			          	len = sprintf((char *)buf,(const char *)&env[4],pal_cyr_coder("Новосибирск, Новолуговое 123456789012345678901234"));
 					break;
 			        case '4':  	//количество батарей
 						web_plazma[4]++;
@@ -406,6 +375,23 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
 		}
 	break;
 
+	case 'a':
+		// Аварии
+		
+		switch (env[1]) {
+			case '0':
+				
+				switch (env[2]) {
+					case '1':
+						len = sprintf((char *)buf,(const char *)&env[4],"normal");
+					break;
+			        case '2':
+			          	len = sprintf((char *)buf,(const char *)&env[4],pal_cyr_coder("Авария БПС №1"));
+					break;
+				}
+		  	break;
+		}
+	break;
 
 /*   case 'd':
       // System password - file 'system.cgi' 
