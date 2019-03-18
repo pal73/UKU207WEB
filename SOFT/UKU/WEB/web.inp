@@ -1,4 +1,5 @@
 uku.html, uku.cgx, 
 log.html, log.cgx,
 set.html, set.cgx,
-uku.css to Web.c nopr root(Web)
+uku.css, but.cgx,
+settings.html, dict.js to Web.c nopr root(Web)

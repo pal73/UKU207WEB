@@ -76,6 +76,8 @@ typedef struct {
 
 
 
+
+
 char* http_tm_src_output(char numOfSrc)
 {
 char buffer[100];
@@ -605,9 +607,8 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
 		break;
 
     case 'x':
-      /* AD Input - xml file 'ad.cgx' */
-//      adv = web_cnt_main;
-      len = sprintf((char *)buf,(const char *)&env[1],adv);
+      if(uku_set_autorized)	len = sprintf((char *)buf,(const char *)&env[1],"ON");
+	  else 					len = sprintf((char *)buf,(const char *)&env[1],"OFF");
       break;
 
     case '2':

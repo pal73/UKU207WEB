@@ -1797,6 +1797,7 @@ extern char bdr_transmit_stat;
 extern char bdr_avar_stat;
 
 extern short pvlk;
+extern char uku_set_autorized;
 //-----------------------------------------------
 //Ресурс вентиляторов
 //extern char vent_resurs_temp[4];

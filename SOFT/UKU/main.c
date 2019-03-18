@@ -810,6 +810,7 @@ U8 socket_tcp;
 
 char pal_cyr_coder_output[200];
 
+char uku_set_autorized=0;
 
 //-----------------------------------------------
 //Ресурс вентиляторов

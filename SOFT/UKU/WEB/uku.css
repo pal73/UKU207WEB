@@ -116,3 +116,19 @@
 	* html #footer {
 		height:1px;
     }
+    .alert {
+		padding: 15px;
+		border: 1px solid #d6e9c6;
+		border-radius: 4px;
+		color: #3c763d;
+		background-color: #dff0d8;
+	}
+	#span_pasw{
+		margin: 0 auto;
+	}
+	#passWord{
+		margin: 0 30px;
+	}
+	#pswBut{
+		margin: 0 10px;
+	}
