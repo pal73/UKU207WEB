@@ -14,6 +14,7 @@
 
 	<script>
 		var passwordFormIsPainted=0;
+		var passwordFormDeniedIsPainted=0;
 		var batTblIsPainted=0;
 		var srcTblIsPainted=0;
 		var invTblIsPainted=0;
@@ -99,6 +100,7 @@
 			console.log("Страница загружена");
 			var div = document.createElement('div');
 			div.className = "alert alert-success";
+			div.id="window1";
 			div.innerHTML = '<span id = "span_pasw">Введите пароль</span><input type="password" class="large" name="PassWord" id="passWord"  autocomplete="off" maxlength="25" value=""><button id="pswBut" onclick="pswrdEntry(passWord.value)">Ввести</button>';
 			main.appendChild(div);
 	  	} );
@@ -160,15 +162,15 @@
 			document.getElementById("dev_serial").innerHTML="S№"+palDecoder(inputData.serial);
 			document.getElementById("dev_place").innerHTML=palDecoder(inputData.place);
 
-			if(inputData.autorised=="OFF"){
-				/*if(passwordFormIsPainted==0){
-					var myTable = '' ;
-
-					myTable+=	'<input type="password" class="large" name="PassWord" id="PassWord" autocomplete="off" onclick="this.value=" ";" maxlength="50" value="************">';
-
-					$("#result").append(myTable);
-					passwordFormIsPainted=1;
-				}*/
+			if(inputData.autorised=="DENIED"){
+				if(passwordFormDeniedIsPainted==0){
+					var span = document.createElement('div');
+					span.innerHTML = '<span>Пароль неверный повторите попытку!</span>';
+					span.id="span_denied";
+					var div = document.getElementsByClassName("alert");
+					window1.appendChild(span);
+					passwordFormDeniedIsPainted=1;
+				}
 			}
 			else if(inputData.autorised=="ON") {
 

@@ -37,12 +37,19 @@
 		$.getJSON( "set.cgx", data, success );
 	}
 	function buttonPressing(input_,input_1) {
+		var data = {};
 		cnter ++;
 		$("#Data1").text(cnter);
 		console.log("нажата кнопка " + input_);
-		$.post("but.cgx",{ but: input_, data: input_1 },function(){console.log("Пришел ответ")});
+		$.post("set.cgx",data,success1);
 		console.log("Отправлен запрос");
+		/*{ but: input_, data: input_1 }*/
 	}
+
+	function success1() {
+      console.log("Пришел ответ");
+  	}
+
 	function controlGenerator(num) {
 		var output="";
 		if(dict[num][3]=="INCDEC") {

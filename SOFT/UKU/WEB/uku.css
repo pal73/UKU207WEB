@@ -132,3 +132,10 @@
 	#pswBut{
 		margin: 0 10px;
 	}
+	#span_denied{
+		margin: 10 auto;
+		font-size: 20px;
+		color: red;
+		text-align: center;
+
+	}	

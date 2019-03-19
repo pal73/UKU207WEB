@@ -211,9 +211,15 @@ web_plazma[3]+=len;
       /* Parameter found, returned string is non 0-length. */
       if (str_scomp (var, "parol=") == __TRUE) {
         web_plazma[1]++;
-		if ((str_scomp (var+6, "123") == __TRUE)&&(len == 9)) {
-			web_plazma[4]++;
-		}
+		if ((str_scomp (var+6, "123") == __TRUE)&&(len == 9)) 
+			{
+			uku_set_autorized=1;
+			}
+		else
+			{
+			psw_err=1;
+			uku_set_autorized=0;
+			}
       }
       else if (str_scomp (var, "but=but1") == __TRUE) {
         //web_plazma[4]=1;
@@ -614,6 +620,7 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
 
     case 'x':
       if(uku_set_autorized)	len = sprintf((char *)buf,(const char *)&env[1],"ON");
+	  else if(psw_err)		len = sprintf((char *)buf,(const char *)&env[1],"DENIED");
 	  else 					len = sprintf((char *)buf,(const char *)&env[1],"OFF");
       break;
 
