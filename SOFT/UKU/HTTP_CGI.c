@@ -34,6 +34,7 @@
 /* http_demo.c */
 extern U16 AD_in (U32 ch);
 extern U8  get_button (void);
+char psw_err;
 
 /* at_System.c */
 extern  LOCALM localm[];
@@ -81,6 +82,7 @@ typedef struct {
 char* http_tm_src_output(char numOfSrc)
 {
 char buffer[100];
+
 //char* buffer;
 sprintf(buffer,"%d %d %d %d 0x%02x", bps[numOfSrc]._Uii, bps[numOfSrc]._Ii, bps[numOfSrc]._Ti, bps[numOfSrc]._state, bps[numOfSrc]._flags_tm );
 
@@ -207,13 +209,16 @@ web_plazma[3]+=len;
 
     if (var[0] != 0) {
       /* Parameter found, returned string is non 0-length. */
-      if (str_scomp (var, "but=but0") == __TRUE) {
-        //web_plazma[4]=0;
+      if (str_scomp (var, "parol=") == __TRUE) {
+        web_plazma[1]++;
+		if ((str_scomp (var+6, "123") == __TRUE)&&(len == 9)) {
+			web_plazma[4]++;
+		}
       }
       else if (str_scomp (var, "but=but1") == __TRUE) {
         //web_plazma[4]=1;
-		if(strstr(var, "pl"))web_plazma[1]++;
-		else if(strstr(var, "mi"))web_plazma[1]--;
+		//if(strstr(var, "pl"))web_plazma[1]++;
+		//else if(strstr(var, "mi"))web_plazma[1]--;
       }
       else if (str_scomp (var, "but=but2") == __TRUE) {
         //web_plazma[4]=2;
@@ -479,7 +484,8 @@ U16 cgi_func (U8 *env, U8 *buf, U16 buflen, U32 *pcgi) {
           		len = sprintf((char *)buf,(const char *)&env[3],web_cnt_main);
           		break;
      		case '3':
-          		len = sprintf((char *)buf,(const char *)&env[3],web_str);
+				if(psw_err)	len = sprintf((char *)buf,(const char *)&env[3],"error");
+				else 	   	len = sprintf((char *)buf,(const char *)&env[3],"good");
           		break;
 		}
 		break;
