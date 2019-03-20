@@ -170,94 +170,82 @@
 					var div = document.getElementsByClassName("alert");
 					window1.appendChild(span);
 					passwordFormDeniedIsPainted=1;
+  					setTimeout(function() {
+    				span.parentNode.removeChild(span);
+    				passwordFormDeniedIsPainted=0;
+  					}, 3000);					
 				}
 			}
 			else if(inputData.autorised=="ON") {
 
+				var div = document.getElementsByClassName("alert");
+				if(div[0]) div[0].parentNode.removeChild(div[0]);
 				
 
-				if(numOfSrc) {
-					for(var i=0; i<numOfSrc; i++) {
-						var finder= "src" + (i + 1) + "Tm";
-						/*src_data[i] = inputData.src1Tm;*/
-						src_data[i] = inputData[finder].split(" ");
-					/*src_data[0] = inputData.src1Tm.split(" ");
-					src_data[1] = inputData.src2Tm.split(" ");
-					src_data[2] = inputData.src3Tm.split(" ");
-					src_data[3] = inputData.src4Tm.split(" ");
-					src_data[4] = inputData.src5Tm.split(" ");
-					src_data[5] = inputData.src6Tm.split(" ");
-					src_data[6] = inputData.src7Tm.split(" ");
-					src_data[7] = inputData.src8Tm.split(" ");
-					src_data[8] = inputData.src9Tm.split(" ");
-					src_data[9] = inputData.src10Tm.split(" ");	*/			
+				var numOfSets = inputData.numOfSet ;
+				var set = new Array(10);
+				set[0] = inputData.s01.split(",");
+				set[1] = inputData.s02.split(",");
+				set[2] = inputData.s03.split(",");
+				set[3] = inputData.s04.split(",");
+				set[4] = inputData.s05.split(",");      
+				console.log("Данные получены");
+			  /*console.log(data1);
+			  console.log(data2);
+			  $("#Data1").text(numOfSets);*/
+			 /* $("#Data2").text(set[0][4]);
+			  $("#Data3").text(set[1][4]);*/
+
+			  if(isPainted==0) {
+			  $("#setTable").remove(); 
+				var myTable = '' ;
+				myTable += '<table id="setTable"  cellspacing=0 cellpadding=2 border=1>' ;
+				myTable += '<col width="250" valign="middle" align="left">' ;
+		   		myTable += '<col width="100" valign="middle" text-align="right" class = "abc">' ;
+		   		myTable += '<col width="300" valign="middle" align="justify">' ;
+				myTable +=  "<thead>" ;
+				myTable +=   "<tr>";
+				myTable +=    "<th>"     + "Параметр" +       "</th>";
+				myTable +=    "<th>"     + "Значение" +       "</th>";
+				myTable +=    "<th>"     + "Изменение" +       "</th>";
+				myTable +=   "</tr>" ;
+				myTable +=  "</thead>" ;
+				myTable +=  "<tbody>" ;
+
+				for (var i = 0; i < numOfSets; i++) {
+				    myTable +=    '<tr>';
+				    myTable += '<td>';
+				    myTable += dict[i][0];
+				    myTable += "</td>";
+				    myTable += '<td class="rightAligned" id = "data'+i+'" >';
+				   	if(dict[i][2]=="INT")myTable += set[i][0]+dict[i][1];
+				    else if(dict[i][2]=="INT/10")myTable += set[i][0]/10+dict[i][1];
+				    else if(dict[i][2]=="INT/100")myTable += set[i][0]/100+dict[i][1];
+				    else if(dict[i][2]=="STRING")myTable += set[i][1];
+				    /*myTable += set[i][0]+dict[i][1];*/
+				    myTable += "</td>";
+				    myTable += '<td>';
+				    myTable += controlGenerator(i);
+				    myTable += "</td>";
+				    myTable += "</tr>";
+				}
+				myTable +=  "</tbody>" ;
+				myTable += "</table>" ;
+
+				$("#result").append(myTable) ;
+				isPainted=1;
+				}
+				else {
+					for(i=0;i<numOfSets;i++) {
+						var idFild="#data"+i;
+						if(dict[i][2]=="INT") $(idFild).text(set[i][0]+dict[i][1]);
+					    else if(dict[i][2]=="INT/10") $(idFild).text(set[i][0]/10+dict[i][1]);
+					    else if(dict[i][2]=="INT/100") $(idFild).text(set[i][0]/100+dict[i][1]);
+					    else if(dict[i][2]=="STRING") $(idFild).text(set[i][1]);
+						
 					}
 				}
-
-
-				if (numOfSrc) {
-					if (srcTblIsPainted==0) {
-						var myTable = '' ;
-						myTable += '<table id="srcTable"  cellspacing=0 cellpadding=2 border=1>' ;
-						myTable += '<col width="150" valign="middle" align="left">' ;
-	   					myTable += '<col width="100" valign="middle" text-align="right" class = "abc">' ;
-	   					myTable += '<col width="100" valign="middle" align="justify">' ;
-	   					myTable += '<col width="100" valign="middle" align="justify">' ;
-	   					myTable += '<col width="100" valign="middle" align="justify">' ;
-	   					myTable += '<col width="100" valign="middle" align="justify">' ;
-
-						myTable +=  "<thead>" ;
-						myTable +=   "<tr>";
-						myTable +=    "<th>"     + " № п/п " + 	"</th>";
-						myTable +=    "<th>"     + "Uвых." +     "</th>";
-						myTable +=    "<th>"     + "Iвых." +     "</th>";
-						myTable +=    "<th>"     + "Tрад." +     "</th>";
-						myTable +=    "<th>"     + "Статус" +     "</th>";
-						myTable +=    "<th>"     + "Авария" +     "</th>";					
-						myTable +=   "</tr>" ;
-						myTable +=  "</thead>" ;
-						myTable +=  "<tbody>" ;
-
-						for (var i = 0; i < numOfSrc; i++) {
-						    myTable +=    '<tr>';
-						    myTable += '<td>';
-						    myTable += i+1;
-						    myTable += "</td>";
-						    myTable += '<td class="rightAligned" id = "u_src_'+i+'" >';
-						   	/*if(dict[i][2]=="INT")myTable += set[i][0]+dict[i][1];
-						    else if(dict[i][2]=="INT/10")myTable += set[i][0]/10+dict[i][1];
-						    else if(dict[i][2]=="INT/100")myTable += set[i][0]/100+dict[i][1];
-						    else if(dict[i][2]=="STRING")myTable += set[i][1];*/
-						    /*myTable += set[i][0]+dict[i][1];*/
-						    myTable += "</td>";
-						    myTable += '<td class="rightAligned" id = "i_src_'+i+'" >';
-						    myTable += "</td>";
-						    myTable += '<td class="rightAligned" id = "t_src_'+i+'" >';
-						    myTable += "</td>";
-						    myTable += '<td class="rightAligned" id = "stat_src_'+i+'" >';
-						    myTable += "</td>";
-						    myTable += '<td class="rightAligned" id = "avar_src_'+i+'" >';
-						    myTable += "</tr>";
-						}
-						myTable +=  "</tbody>" ;
-						myTable += "</table>" ;
-
-						$("#result").append(myTable) ;
-						srcTblIsPainted=1;
-					} 
-					else {
-						for(i=0;i<numOfSrc;i++) {
-							/*var idFild="u_src_"+i;*/
-							$("#u_src_"+i).text(src_data[i][0]/10 + "В");
-							$("#i_src_"+i).text(src_data[i][1]/10 + "В");
-							$("#t_src_"+i).text(src_data[i][2] + "°C");
-							$("#stat_src_"+i).text(src_data[i][3]);
-							$("#avar_src_"+i).text(src_data[i][4]);
-						}
-					}
-				}
-
-			}
+		    }
 
 	      /*var data1 = inputData.abcd ;
 	      var data2 = inputData.efgh ;
