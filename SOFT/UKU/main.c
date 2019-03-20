@@ -1359,33 +1359,33 @@ localm[NETIF_ETH].DefGW[1]=lc640_read_int(EE_ETH_GW_2);
 localm[NETIF_ETH].DefGW[2]=lc640_read_int(EE_ETH_GW_3);
 localm[NETIF_ETH].DefGW[3]=lc640_read_int(EE_ETH_GW_4);
 */	
-/*
+
 localm[NETIF_ETH].IpAdr[0]=192;
 localm[NETIF_ETH].IpAdr[1]=168;
 localm[NETIF_ETH].IpAdr[2]=0;
 localm[NETIF_ETH].IpAdr[3]=20;
-*/
 
+/*
 localm[NETIF_ETH].IpAdr[0]=192;
 localm[NETIF_ETH].IpAdr[1]=168;
 localm[NETIF_ETH].IpAdr[2]=1;
 localm[NETIF_ETH].IpAdr[3]=35;
-
+*/
 localm[NETIF_ETH].NetMask[0]=255;
 localm[NETIF_ETH].NetMask[1]=255;
 localm[NETIF_ETH].NetMask[2]=255;
 localm[NETIF_ETH].NetMask[3]=0;
-/*
+
 localm[NETIF_ETH].DefGW[0]=192;
 localm[NETIF_ETH].DefGW[1]=168;
 localm[NETIF_ETH].DefGW[2]=2;
 localm[NETIF_ETH].DefGW[3]=1; 
-*/
 
+/*
 localm[NETIF_ETH].DefGW[0]=192;
 localm[NETIF_ETH].DefGW[1]=168;
 localm[NETIF_ETH].DefGW[2]=1;
-localm[NETIF_ETH].DefGW[3]=254; 
+localm[NETIF_ETH].DefGW[3]=254; */
 }
 
 
